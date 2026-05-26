@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from "next/server";
 import { getTemplate } from "@/data/templates";
 import { nanoid } from "nanoid";
