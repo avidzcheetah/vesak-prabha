@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 import { getUrl } from "@/lib/url-store";
 
+export const runtime = 'edge';
+
 interface PageProps {
   params: Promise<{ code: string }>;
 }

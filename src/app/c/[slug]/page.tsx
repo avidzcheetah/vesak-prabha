@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import SharePageClient from "./share-page-client";
 import { getTemplate } from "@/data/templates";
 
+export const runtime = "edge";
+
 interface PageProps {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{
