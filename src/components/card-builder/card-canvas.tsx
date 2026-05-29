@@ -57,13 +57,13 @@ export default function CardCanvas({
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/40" />
 
         {/* Text content overlay */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center px-6 sm:px-10 md:px-16 py-6 sm:py-10 text-center">
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-10 md:px-16 py-3 sm:py-10 text-center">
 
           {/* Frosted glass text backdrop */}
-          <div className="relative bg-black/25 backdrop-blur-[6px] rounded-2xl px-6 sm:px-10 md:px-14 py-5 sm:py-8 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+          <div className="relative bg-black/25 backdrop-blur-[6px] rounded-2xl px-4 sm:px-10 md:px-14 py-3 sm:py-8 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
 
             {/* Vesak title — accent colored, bold */}
-            <div className="mb-3 sm:mb-5">
+            <div className="mb-2 sm:mb-5">
               <p
                 className={cn(
                   "text-xs sm:text-sm md:text-base font-bold uppercase tracking-[0.25em] mb-2",
@@ -96,7 +96,7 @@ export default function CardCanvas({
             {/* Recipient — large, bold, clear */}
             <h2
               className={cn(
-                "text-xl sm:text-3xl md:text-4xl font-extrabold mb-2 sm:mb-3 leading-tight",
+                "text-lg sm:text-3xl md:text-4xl font-extrabold mb-1 sm:mb-3 leading-tight",
                 headingFontClass
               )}
               style={{
@@ -110,7 +110,7 @@ export default function CardCanvas({
             {/* Message — bold, good contrast */}
             <p
               className={cn(
-                "text-xs sm:text-sm md:text-base leading-relaxed max-w-lg mb-4 sm:mb-6 font-semibold",
+                "text-[11px] sm:text-sm md:text-base leading-relaxed max-w-lg mb-2 sm:mb-6 font-semibold",
                 bodyFontClass
               )}
               style={{
@@ -122,7 +122,7 @@ export default function CardCanvas({
             </p>
 
             {/* Decorative divider */}
-            <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
+            <div className="flex items-center justify-center gap-2 mb-2 sm:mb-4">
               <div
                 className="w-6 sm:w-8 h-px"
                 style={{ backgroundColor: template.accent_color, opacity: 0.4 }}
