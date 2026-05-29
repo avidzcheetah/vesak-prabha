@@ -1,19 +1,7 @@
-// Simple in-memory URL store using a Node.js global singleton.
-// Attaching to `global` ensures the same Map instance is shared
-// across all route handlers within the same Node.js process,
-// even when Next.js loads the module in different bundle chunks.
+// Persistent URL store using Supabase.
+// Replaces the previous in-memory Map that was lost on every deploy/restart.
 
-declare global {
-  // eslint-disable-next-line no-var
-  var __vesakUrlMap: Map<string, string> | undefined;
-}
-
-// Lazily initialize once and reuse
-if (!global.__vesakUrlMap) {
-  global.__vesakUrlMap = new Map<string, string>();
-}
-
-const urlMap = global.__vesakUrlMap;
+import { supabase } from "./supabase";
 
 // Generate a short 7-char alphanumeric code
 function generateCode(): string {
@@ -25,20 +13,54 @@ function generateCode(): string {
   return result;
 }
 
-export function storeUrl(longUrl: string): string {
-  // Return existing code for the same URL
-  for (const [code, url] of urlMap.entries()) {
-    if (url === longUrl) return code;
+export async function storeUrl(longUrl: string): Promise<string> {
+  // Check if this URL already has a short code
+  const { data: existing } = await supabase
+    .from("short_urls")
+    .select("code")
+    .eq("long_url", longUrl)
+    .limit(1)
+    .single();
+
+  if (existing) {
+    return existing.code;
   }
 
+  // Generate a unique code
   let code = generateCode();
-  while (urlMap.has(code)) {
-    code = generateCode();
+  let attempts = 0;
+  const maxAttempts = 10;
+
+  while (attempts < maxAttempts) {
+    const { error } = await supabase
+      .from("short_urls")
+      .insert({ code, long_url: longUrl });
+
+    if (!error) {
+      return code;
+    }
+
+    // If code already exists (unique constraint violation), try another
+    if (error.code === "23505") {
+      code = generateCode();
+      attempts++;
+      continue;
+    }
+
+    // Other errors
+    throw new Error(`Failed to store short URL: ${error.message}`);
   }
-  urlMap.set(code, longUrl);
-  return code;
+
+  throw new Error("Failed to generate unique short code after max attempts");
 }
 
-export function getUrl(code: string): string | undefined {
-  return urlMap.get(code);
+export async function getUrl(code: string): Promise<string | undefined> {
+  const { data } = await supabase
+    .from("short_urls")
+    .select("long_url")
+    .eq("code", code)
+    .limit(1)
+    .single();
+
+  return data?.long_url ?? undefined;
 }

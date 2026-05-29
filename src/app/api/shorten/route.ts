@@ -1,5 +1,3 @@
-export const runtime = 'edge';
-
 import { NextResponse } from "next/server";
 import { storeUrl } from "@/lib/url-store";
 
@@ -11,7 +9,7 @@ export async function POST(request: Request) {
     }
 
     // Generate a short code and build a short URL using the app's own domain
-    const code = storeUrl(url);
+    const code = await storeUrl(url);
 
     // Build the short URL relative to the current origin
     const origin = request.headers.get("origin") || request.headers.get("referer")?.replace(/\/api\/shorten.*$/, "") || "";
