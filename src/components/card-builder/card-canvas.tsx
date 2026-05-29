@@ -104,7 +104,7 @@ export default function CardCanvas({
                 textShadow: textShadow,
               }}
             >
-              {isSinhala ? `ආදරණීය ${displayRecipient}` : `Dear ${displayRecipient}`}
+              {isSinhala ? `ආදරණීය ${displayRecipient},` : `Dear ${displayRecipient},`}
             </h2>
 
             {/* Message — bold, good contrast */}

@@ -134,7 +134,10 @@ export default function SharePageClient({ slug, search }: SharePageClientProps) 
   };
 
   const handleWhatsApp = () => {
-    const text = `Dear ${recipient}\n${message}\n From ${sender}\n\nView your Vesak Card at ${shortenedUrl}`;
+    const isSinhala = language === "si";
+    const text = isSinhala
+      ? `ආදරණීය ${recipient},\n${message}\n — ${sender} වෙතින්\n\nඔබේ වෙසක් පත මෙතැනින් බලන්න: ${shortenedUrl}`
+      : `Dear ${recipient},\n${message}\n From ${sender}\n\nView your Vesak Card at ${shortenedUrl}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
   };
 

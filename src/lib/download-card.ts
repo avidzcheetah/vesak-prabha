@@ -232,7 +232,7 @@ export async function downloadCard(
   ctx.globalAlpha = 1.0;
 
   // 5b. Draw Recipient
-  const recText = isSinhala ? `ආදරණීය ${displayRecipient}` : `Dear ${displayRecipient}`;
+  const recText = isSinhala ? `ආදරණීය ${displayRecipient},` : `Dear ${displayRecipient},`;
   drawShadowedText(recText, 600, recipientY, recipientFont, template.text_color, "rgba(0, 0, 0, 0.95)", 10);
 
   // 5c. Draw wrapped message text
