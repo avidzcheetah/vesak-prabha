@@ -40,7 +40,7 @@ export default function CardCanvas({
   const accentTextShadow = "0 2px 6px rgba(0,0,0,0.7), 0 0 15px rgba(0,0,0,0.4)";
 
   return (
-    <div className="relative w-full" style={{ aspectRatio: "1200 / 630" }}>
+    <div className="relative w-full aspect-[4/3.6] sm:aspect-[1200/630]">
       <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl border border-border/50">
         {/* Background Image */}
         <Image

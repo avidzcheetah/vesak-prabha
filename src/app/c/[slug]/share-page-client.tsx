@@ -186,7 +186,7 @@ export default function SharePageClient({ slug, search }: SharePageClientProps) 
           >
             <div className="relative w-full overflow-hidden">
               {showTemplateOnly ? (
-                <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-border/50" style={{ aspectRatio: "1200 / 630" }}>
+                <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-border/50 aspect-[4/3.6] sm:aspect-[1200/630]">
                   <img
                     src={template.bg_url}
                     alt={template.name_en}
